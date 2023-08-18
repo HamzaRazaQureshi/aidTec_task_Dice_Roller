@@ -4,13 +4,25 @@ import random
 def roll_dice():
     num_dice = int(entry.get())
     dice = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685']
-    results = [random.choice(dice) for _ in range(num_dice)]
-    total = sum([ord(result) - ord('\u2680') + 1 for result in results])
-    result_label.config(text=' '.join(results) + f'\n {total}', font=("Ariel", 60))
-    result_label.pack()
-    play_again_button.pack()
-    roll_button.pack_forget()
 
+    rolling_dice = Label(root, font=("Ariel", 60))
+    rolling_dice.pack()
+
+    def animate_roll(frames_left):
+        if frames_left == 0:
+            results = [random.choice(dice) for _ in range(num_dice)]
+            total = sum([ord(result) - ord('\u2680') + 1 for result in results])
+            rolling_dice.pack_forget()
+            result_label.config(text=' '.join(results) + f'\n {total}', font=("Ariel", 60))
+            result_label.pack()
+            play_again_button.pack()
+            roll_button.pack_forget()
+        else:
+            result = random.choice(dice)
+            rolling_dice.config(text=result)
+            root.after(100, animate_roll, frames_left - 1)
+
+    animate_roll(10) 
 
 def play_again():
     result_label.pack_forget()
