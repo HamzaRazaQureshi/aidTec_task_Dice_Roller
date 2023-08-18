@@ -25,13 +25,13 @@ root.geometry("1000x500")
 root.title("DICE ROLLER")
 
 num_dice_label = Label(root, text="Enter the number of Dice:", font=("Ariel", 18))
-num_dice_label.pack()
+num_dice_label.pack(pady=5)
 
 entry = Entry(root, width=40, font=('Arial 12'))
-entry.pack()
+entry.pack(pady=5)
 
 roll_button = Button(root, text="Roll the Dice!", foreground='blue', font=("Ariel", 12), height=2, command=roll_dice)
-roll_button.pack()
+roll_button.pack(pady=5)
 
 result_label = Label(root, font=("Ariel", 18))
 
